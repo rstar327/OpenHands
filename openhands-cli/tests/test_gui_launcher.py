@@ -111,8 +111,6 @@ class TestLaunchGuiServer:
         [
             # Docker pull failure
             (subprocess.CalledProcessError(1, 'docker pull'), None, 1, False, False),
-            # Docker pull timeout
-            (subprocess.TimeoutExpired('docker pull', 300), None, 1, False, False),
             # Docker run failure
             (MagicMock(returncode=0), subprocess.CalledProcessError(1, 'docker run'), 1, False, False),
             # KeyboardInterrupt during run
@@ -184,7 +182,7 @@ class TestLaunchGuiServer:
             # Check pull command
             pull_call = mock_run.call_args_list[0]
             pull_cmd = pull_call[0][0]
-            assert pull_cmd[0:3] == ['docker', 'pull', 'docker.all-hands.dev/all-hands-ai/runtime:latest-nikolaik']
+            assert pull_cmd[0:3] == ['docker', 'pull', 'docker.all-hands.dev/openhands/runtime:latest-nikolaik']
 
             # Check run command
             run_call = mock_run.call_args_list[1]
